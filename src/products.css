@@ -1,0 +1,59 @@
+
+/* Container for search and filter */
+.search-filter-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+}
+
+/* Style for the search input */
+.search-input {
+  width: 50%;
+}
+
+/* Style for the filter dropdown */
+.filter-dropdown {
+  width: 40%;
+}
+
+/* Style for the product tiles */
+.product-tile {
+  max-width: 500px; 
+  margin: 0 auto;
+  margin-bottom: 20px;
+  padding: 20px;
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+}
+
+.product-image {
+  width: 100px;
+  height: 100px;
+  margin-right: 20px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.product-info {
+  flex-grow: 1;
+}
+
+.product-name {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.product-description {
+  color: #555;
+}
+
+.product-price {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #007bff;
+}
+
