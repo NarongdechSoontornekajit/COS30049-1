@@ -1,7 +1,7 @@
 
 /* Style for the navigation bar */
 nav {
-  background-color: #333;
+  background-color: transparent;
   color: white;
   display: flex;
   justify-content: space-between;
@@ -25,5 +25,35 @@ nav ul li a {
 nav ul li a:hover {
   text-decoration: underline;
 }
+
+#nav {
+  background-color: transparent;
+  /* Add any additional styles you need for the AppBar */
+}
+
+/* Added by thomas - this include all from div in app.js */
+body {
+  color: white;
+  background: linear-gradient(#1D1A34, #51488C, #1D1A34);
+  opacity: 0.93;
+  margin: 0;
+  height: 100%;
+  
+}
+
+.footer {
+  background-color: transparent;
+  color: white;
+  bottom: 0%;
+  width: 100%;
+  position: fixed;
+}
+
+div {
+  background-color: transparent;
+  color: white;
+}
+
+
 
 
