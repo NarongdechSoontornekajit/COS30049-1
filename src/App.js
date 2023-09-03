@@ -33,7 +33,7 @@ class App extends React.Component {
     return (
       <body>
         <Box sx={{ flexGrow: 1 }}>
-          <Grid container spacing={"1"}
+          <Grid container spacing={"20px"}
             direction="row"
             justifyContent="space-between"
             alignItems="stretch"
@@ -42,8 +42,7 @@ class App extends React.Component {
             <Grid item xs={12} sm={12} md={12}>
               <TransparentGridItem><ResponsiveAppBar/></TransparentGridItem>
             </Grid>
-            <Grid item xs={12} sm={12} md={12}
-              alignItems="stretch">
+            <Grid item xs={12} sm={12} md={12} alignItems="stretch">
               <TransparentGridItem>
                 <Routes>
                 <Route path="/Home" element={<Body />} />
@@ -54,7 +53,7 @@ class App extends React.Component {
               </TransparentGridItem>
             </Grid>
             {/* item end */}
-            <Grid item xs={12} sm={12} md={12}>
+            <Grid item xs={12} sm={12} md={12} sx={{buttom:0}}>
               <TransparentGridItem><Footer/></TransparentGridItem>
             </Grid>
           </Grid>
