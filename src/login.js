@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './login.css';
+import { Grid, Paper, Typography, TextField, Button, Box } from '@mui/material';
+import { style } from 'd3';
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -17,36 +19,67 @@ const Login = () => {
   };
 
   return (
-    <div className="login-container">
-      {loggedIn ? (
-        <div>
-          <p>Welcome, {username}!</p>
-        </div>
-      ) : (
-        <div>
-          <h2 className="login-title">Login</h2>
-          <input
-            className="login-input"
-            type="text"
-            placeholder="Username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-          <br />
-          <input
-            className="login-input"
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <br />
-          <button className="login-button" onClick={handleLogin}>
-            Login
-          </button>
-        </div>
-              )}
-    </div>
+     <Grid container sx={{t:3}} justifyContent="center" style={{ height: '100vh' }}>
+      <Grid item xs={0} sm={3} md={4}></Grid>
+      <Grid item xs={10} sm={6} md={4}>
+        <Paper 
+          sx={{
+            p: 2,
+            marginTop: 5,
+            paddingBottom: 10,
+            bgcolor: '#ffffff76',
+            borderRadius: 5,
+          }}
+        >
+          <Typography 
+            variant="h4" 
+            align="center"
+            gutterBottom
+            sx={{
+              color: 'white'
+            }}
+          >
+            Sign In
+          </Typography>
+          <form>
+            <TextField
+              label="Username"
+              variant="standard"
+              fullWidth
+              margin="normal"
+              required
+            />
+            <TextField
+              label="Password"
+              variant="standard"
+              fullWidth
+              margin="normal"
+              type="password"
+              required
+              sx={{
+                paddingBottom: 10
+              }}
+            />
+            <Button
+              variant="contained"
+              color="primary"
+              size="large"
+              fullWidth
+              type="submit"
+              sx={{
+                borderRadius: 5,
+                backgroundColor:'lightgreen',
+                style:'bold'
+                
+              }}
+            >
+              Login
+            </Button>
+          </form>
+        </Paper>
+      </Grid>
+      <Grid item xs={0} sm={3} md={4}></Grid>
+    </Grid>
   );
 };
 
