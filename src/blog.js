@@ -6,6 +6,9 @@ import ButtonBase from "@mui/material/ButtonBase";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
 import "./products.css";
+import crypto from './images/crypto.png';
+import { useNavigate } from 'react-router-dom';
+
 
 const Img = styled("img")({
   margin: "auto",
@@ -20,56 +23,56 @@ const products = [
     name: "Product 1",
     description: "Description for Product 1",
     price: "$19.00",
-    imageUrl: "URL_TO_IMAGE_1"
+    imageUrl: crypto
   },
   {
     id: 2,
     name: "Product 2",
     description: "Description for Product 2",
     price: "$15.00",
-    imageUrl: "URL_TO_IMAGE_2"
+    imageUrl: crypto
   },
   {
     id: 3,
     name: "Product 3",
     description: "Description for Product 3",
     price: "$25.00",
-    imageUrl: "URL_TO_IMAGE_3"
+    imageUrl: crypto
   },
   {
     id: 4,
     name: "Product 4",
     description: "Description for Product 4",
     price: "$10.00",
-    imageUrl: "URL_TO_IMAGE_4"
+    imageUrl: crypto
   },
   {
     id: 5,
     name: "Product 5",
     description: "Description for Product 5",
     price: "$12.50",
-    imageUrl: "URL_TO_IMAGE_5"
+    imageUrl: crypto
   },
   {
     id: 6,
     name: "Product 6",
     description: "Description for Product 6",
     price: "$12.50",
-    imageUrl: "URL_TO_IMAGE_6"
+    imageUrl: crypto
   },
   {
     id: 7,
     name: "Product 7",
     description: "Description for Product 7",
     price: "$12.50",
-    imageUrl: "URL_TO_IMAGE_7"
+    imageUrl: crypto
   },
   {
     id: 8,
     name: "Product 8",
     description: "Description for Product 8",
     price: "$12.50",
-    imageUrl: "URL_TO_IMAGE_8"
+    imageUrl: crypto
   }
 ];
 export default function ComplexGrid() {
@@ -84,6 +87,14 @@ export default function ComplexGrid() {
   // Function to handle search text change
   const handleSearchChange = (event) => {
     setSearchText(event.target.value);
+  };
+
+  const navigate = useNavigate();
+
+  // Function to handle "Buy" button click
+  const handleBuyClick = (product) => {
+    // Navigate to the Buy page and pass the product as a search parameter
+    navigate(`/buy?productId=${product.id}`);
   };
 
   return (
@@ -136,7 +147,9 @@ export default function ComplexGrid() {
       {product.price}
       </Typography>
       </div>
-      <button className="buy-button">Buy</button>
+      <button className="buy-button" onClick={() => handleBuyClick(product)}>
+            Buy
+      </button>
       </Paper>
     ))}
     </div>
