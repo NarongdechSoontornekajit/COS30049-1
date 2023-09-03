@@ -5,8 +5,6 @@ import CurrencyBitcoinIcon from '@mui/icons-material/CurrencyBitcoin';
 import AdbIcon from '@mui/icons-material/CurrencyExchange';
 import Typography from '@mui/material/Typography';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
-
-
  
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
@@ -40,8 +38,9 @@ const Footer = () => (
     direction="row"
     justifyContent="center"
     >
+        
         <Grid item xs={12} sm={12} md={6} textAlign="center">
-            <TransparentGridItem>
+            <TransparentGridItem> {/* Company logo and Social media section */}
                 <p><br/><br/><br/><hr/></p>
                 <p style={{fontFamily: 'monospace', fontSize: 18}}>EtherTrade</p>
                 <div>
@@ -53,12 +52,12 @@ const Footer = () => (
             </TransparentGridItem> 
         </Grid>
         <Grid item xs={12} sm={12} md={6} textAlign="center">
-            <TransparentGridItem>
+            <TransparentGridItem> {/* link to other page */}
                 <p><br/><br/><br/><hr/></p>
                 <p style={{ fontSize: 18, fontFamily: 'monospace'}}>Help&Support</p>
                 <p><Link to="/Home" style={{ fontSize: 12, color: 'lightgrey'}}>Home</Link></p>
                 <p><Link to="/Product" style={{ fontSize: 12, color: 'lightgrey'}}>Product</Link></p>
-                <p><Link to="/BasicGrid" style={{ fontSize: 12, color: 'lightgrey'}}>History</Link></p>
+                <p><Link to="/History" style={{ fontSize: 12, color: 'lightgrey'}}>History</Link></p>
                 
             </TransparentGridItem>
         </Grid>

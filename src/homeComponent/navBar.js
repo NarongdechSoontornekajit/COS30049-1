@@ -15,18 +15,17 @@ import AdbIcon from '@mui/icons-material/CurrencyExchange';
 
 import { styled } from '@mui/system';
 
-import Login from '../login.js'
-import Blog from '../blog.js'
-import BasicGrid from '../grid.js';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 
+// Used for later fucntion lable for button text, path for routing path
 const pages = [
     { label: 'Home', path: '/Home' },
     { label: 'Product', path: '/Product' },
     { label: 'Login', path: '/Login' },
-    { label: 'History', path: '/BasicGrid' },
+    { label: 'History', path: '/History' },
   ];
 
+  // used for later fucntion lable for button text, path for routing path
 const settings = [
     { label: 'Sign In', path: '/Login' },
     { label: 'Sign Out', path: '/Home' },
