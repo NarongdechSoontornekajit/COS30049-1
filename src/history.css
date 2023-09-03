@@ -1,8 +1,8 @@
-
 .history-container {
-  max-width: 800px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
+
 }
 
 .history-heading {
@@ -13,8 +13,8 @@
 .transaction-row {
   display: flex;
   align-items: center;
-  border-bottom: 1px solid #ccc;
-  padding: 10px 0;
+  padding: 10px;
+  width: 90%;
 }
 
 .transaction-details {
@@ -24,14 +24,21 @@
 .item-name {
   font-weight: bold;
   margin-bottom: 5px;
+  text-align: left;
 }
 
 .item-description {
-  color: #555;
+  color: #fff;
   margin-bottom: 5px;
+  text-align: left;
+
 }
 
 .time-price {
-  color: #888;
+  color: #fff;
+  text-align: left;
 }
 
+.line-break {
+  width: 100%;
+}

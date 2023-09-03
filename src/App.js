@@ -1,7 +1,7 @@
 import React from 'react';
 import Login from './login.js';
-import Blog from './blog.js';
-import BasicGrid from './grid.js';
+import Blog from './product.js';
+import History from './history.js';
 import Buy from './buy.js'; 
 import Body from './homeComponent/homeBody.js';
 import ResponsiveAppBar from './homeComponent/navBar.js';
@@ -12,6 +12,7 @@ import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
+import { Home } from '@mui/icons-material';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: 'transparent',
@@ -42,22 +43,23 @@ class App extends React.Component {
               style={{ height: '100vh' }}
             >
               <Grid item xs={12} sm={12} md={12}>
-                <TransparentGridItem><ResponsiveAppBar/></TransparentGridItem>
+                <TransparentGridItem><ResponsiveAppBar/></TransparentGridItem> {/* Header Section */}
               </Grid>
               <Grid item xs={12} sm={12} md={12} alignItems="stretch">
                 <TransparentGridItem>
                   <Routes>
-                    <Route path="/Home" element={<Body />} />
-                    <Route path="/Product" element={<Blog />} />
-                    <Route path="/Login" element={<Login />} />
-                    <Route path="/BasicGrid" element={<BasicGrid />} />
+                    <Route path="/" element={<Body />} /> {/* Home */}
+                    <Route path="/Home" element={<Body />} /> {/* Home */}
+                    <Route path="/Product" element={<Blog />} /> {/* Product */}
+                    <Route path="/Login" element={<Login />} /> {/* SignIN/Out */}
+                    <Route path="/History" element={<History />} /> {/* History */}
                     <Route path="/buy" element={<Buy />} /> {/* Add Route for Buy component */}
                   </Routes>
                 </TransparentGridItem>
               </Grid>
               {/* item end */}
               <Grid item xs={12} sm={12} md={12}>
-                <TransparentGridItem><Footer/></TransparentGridItem>
+                <TransparentGridItem><Footer/></TransparentGridItem> {/* Footer section */}
               </Grid>
             </Grid>
           </Box>
