@@ -1,6 +1,5 @@
 import * as React from "react";
 import { styled } from "@mui/material/styles";
-import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import ButtonBase from "@mui/material/ButtonBase";
@@ -50,68 +49,96 @@ const products = [
     description: "Description for Product 5",
     price: "$12.50",
     imageUrl: "URL_TO_IMAGE_5"
+  },
+  {
+    id: 6,
+    name: "Product 6",
+    description: "Description for Product 6",
+    price: "$12.50",
+    imageUrl: "URL_TO_IMAGE_6"
+  },
+  {
+    id: 7,
+    name: "Product 7",
+    description: "Description for Product 7",
+    price: "$12.50",
+    imageUrl: "URL_TO_IMAGE_7"
+  },
+  {
+    id: 8,
+    name: "Product 8",
+    description: "Description for Product 8",
+    price: "$12.50",
+    imageUrl: "URL_TO_IMAGE_8"
   }
 ];
-
 export default function ComplexGrid() {
   const [filterCriteria, setFilterCriteria] = React.useState("all"); // State for filter criteria
+  const [searchText, setSearchText] = React.useState(""); // State for search text
 
   // Function to handle filter criteria change
   const handleFilterChange = (event) => {
     setFilterCriteria(event.target.value);
   };
 
+  // Function to handle search text change
+  const handleSearchChange = (event) => {
+    setSearchText(event.target.value);
+  };
+
   return (
     <div>
-      {/* Search and Filter Section */}
       <div className="search-filter-container">
-        <TextField
-          className="search-input"
-          label="Search Products"
-          variant="outlined"
-          // Add necessary search functionality here
-        />
-        <TextField
-          className="filter-dropdown"
-          select
-          label="Filter by"
-          value={filterCriteria}
-          onChange={handleFilterChange}
-          variant="outlined"
-        >
-          <MenuItem value="all">All</MenuItem>
-          <MenuItem value="price">Price</MenuItem>
-          <MenuItem value="name">Name</MenuItem>
-          {/* Add more filtering options here */}
-        </TextField>
+        <div className="search-input-container">
+          <TextField
+            className="search-input"
+            label="Search Products"
+            variant="outlined"
+            value={searchText}
+            onChange={handleSearchChange}
+          />
+        </div>
+        <div className="filter-dropdown-container">
+          <TextField
+            className="filter-dropdown"
+            select
+            label="Filter by"
+            value={filterCriteria}
+            onChange={handleFilterChange}
+            variant="outlined"
+          >
+            <MenuItem value="all">All</MenuItem>
+            <MenuItem value="price">Price</MenuItem>
+            <MenuItem value="name">Name</MenuItem>
+            {/* Add more filtering options here */}
+          </TextField>
+        </div>
       </div>
-      {/* Display Products */}
-      {products.map((product) => (
-        <Paper
-          key={product.id}
-          className="product-tile"
-        >
-          <div className="product-image">
-            <ButtonBase sx={{ width: 128, height: 128 }}>
-              <Img alt={product.name} src={product.imageUrl} />
-            </ButtonBase>
-          </div>
-          <div className="product-info">
-            <Typography className="product-name" variant="subtitle1">
-              {product.name}
-            </Typography>
-            <Typography className="product-description" variant="body2">
-              {product.description}
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              ID: {product.id}
-            </Typography>
-          </div>
-          <Typography className="product-price" variant="subtitle1">
-            {product.price}
-          </Typography>
-        </Paper>
-      ))}
+   {/* Display Products */}
+    {products.map((product) => (
+      <Paper key={product.id} className="product-tile">
+      <div className="product-image">
+      <ButtonBase sx={{ width: 128, height: 128 }}>
+      <Img alt={product.name} src={product.imageUrl} />
+      </ButtonBase>
+      </div>
+      <div className="product-info">
+      <Typography className="product-name" variant="subtitle1">
+      {product.name}
+      </Typography>
+      <Typography className="product-description" variant="body2">
+      {product.description}
+      </Typography>
+      <Typography variant="body2" color="text.secondary">
+      ID: {product.id}
+      </Typography>
+      <Typography className="product-price" variant="subtitle1">
+      {product.price}
+      </Typography>
+      </div>
+      <button className="buy-button">Buy</button>
+      </Paper>
+    ))}
     </div>
   );
 }

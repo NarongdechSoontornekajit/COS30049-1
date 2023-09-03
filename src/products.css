@@ -1,33 +1,55 @@
-
-/* Container for search and filter */
+/* Add flex display to the search-filter-container */
 .search-filter-container {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px;
+  align-items: flex-start; /* Align items to the top of the flex container */
+  margin-bottom: 20px; /* Add some margin between the bars and products */
+}
+/* Style for the search input container */
+.search-input-container {
+  flex-grow: 2; /* Grow to take available space */
+  margin-right: 10px; /* Adjust spacing between search and filter bars */
+}
+
+/* Style for the filter dropdown container */
+.filter-dropdown-container {
+  flex-grow: 1; /* Don't shrink; fixed width */
+  width: 150px; /* Adjust the width as needed */
+  margin-left: 10px; /* Adjust spacing between search and filter bars */
 }
 
 /* Style for the search input */
 .search-input {
-  width: 50%;
+  width: 100%;
+  background-color: rgba(245, 245, 245, 0.8); /* Add opacity */
+  backdrop-filter: blur(10px); /* Add a backdrop filter for a frosted glass effect */
+  border-radius: 8px;
+  border: none;
+  padding: 8px; /* Adjust padding as needed */
 }
 
 /* Style for the filter dropdown */
 .filter-dropdown {
-  width: 40%;
+  width: 100%;
+  background-color: rgba(245, 245, 245, 0.8); /* Add opacity */
+  backdrop-filter: blur(10px); /* Add a backdrop filter for a frosted glass effect */
+  border-radius: 8px;
+  border: none;
+  padding: 8px; /* Adjust padding as needed */
 }
 
 /* Style for the product tiles */
 .product-tile {
-  max-width: 500px; 
+  max-width: 500px;
   margin: 0 auto;
   margin-bottom: 20px;
   padding: 20px;
-  background-color: #f5f5f5;
+  background-color: rgba(255, 255, 255, 0.8); /* Add opacity */
+  backdrop-filter: blur(10px); /* Add a backdrop filter for a frosted glass effect */
   border: 1px solid #ddd;
   border-radius: 8px;
   display: flex;
   align-items: center;
+  position: relative; /* Position for the "Buy" button */
 }
 
 .product-image {
@@ -52,8 +74,19 @@
 }
 
 .product-price {
-  font-size: 1.2rem;
-  font-weight: bold;
-  color: #007bff;
+  font-size: 1rem; /* Reduce font size */
+  color: #555; /* Change the color for better readability */
+  margin-top: 8px; /* Separate the price from the ID */
 }
 
+.buy-button {
+  position: absolute;
+  right: 20px; /* Adjust the button position to the right */
+  bottom: 20px; /* Adjust the button position to the bottom */
+  background-color: #4caf50; /* Green button background color */
+  color: white; /* Text color */
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
