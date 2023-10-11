@@ -8,6 +8,7 @@ import MenuItem from "@mui/material/MenuItem";
 import "./products.css";
 import crypto from './images/crypto.png';
 import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 
 
 const Img = styled("img")({
@@ -17,65 +18,8 @@ const Img = styled("img")({
   maxHeight: "100%"
 });
 
-const products = [
-  {
-    id: 1,
-    name: "Product 1",
-    description: "Description for Product 1",
-    price: "$19.00",
-    imageUrl: crypto
-  },
-  {
-    id: 2,
-    name: "Product 2",
-    description: "Description for Product 2",
-    price: "$15.00",
-    imageUrl: crypto
-  },
-  {
-    id: 3,
-    name: "Product 3",
-    description: "Description for Product 3",
-    price: "$25.00",
-    imageUrl: crypto
-  },
-  {
-    id: 4,
-    name: "Product 4",
-    description: "Description for Product 4",
-    price: "$10.00",
-    imageUrl: crypto
-  },
-  {
-    id: 5,
-    name: "Product 5",
-    description: "Description for Product 5",
-    price: "$12.50",
-    imageUrl: crypto
-  },
-  {
-    id: 6,
-    name: "Product 6",
-    description: "Description for Product 6",
-    price: "$12.50",
-    imageUrl: crypto
-  },
-  {
-    id: 7,
-    name: "Product 7",
-    description: "Description for Product 7",
-    price: "$12.50",
-    imageUrl: crypto
-  },
-  {
-    id: 8,
-    name: "Product 8",
-    description: "Description for Product 8",
-    price: "$12.50",
-    imageUrl: crypto
-  }
-];
 export default function ComplexGrid() {
+  const [products, setProducts] = useState([]);
   const [filterCriteria, setFilterCriteria] = React.useState("all"); // State for filter criteria
   const [searchText, setSearchText] = React.useState(""); // State for search text
 
@@ -97,9 +41,18 @@ export default function ComplexGrid() {
     navigate(`/buy?productId=${product.id}`);
   };
 
+  useEffect(() => {
+    // Fetch products when the component mounts
+    fetch('http://localhost:5000/products')
+      .then((response) => response.json())
+      .then((data) => setProducts(data))
+      .catch((error) => console.error('Error fetching data:', error));
+  }, []); // Empty dependency array ensures the effect runs only once
+
+
   return (
     <div>
-      <div className="search-filter-container">
+    <div className="search-filter-container">
         <div className="search-input-container">
           <TextField
             className="search-input"
@@ -144,7 +97,7 @@ export default function ComplexGrid() {
       ID: {product.id}
       </Typography>
       <Typography className="product-price" variant="subtitle1">
-      {product.price}
+      ${product.price}
       </Typography>
       </div>
       <button className="buy-button" onClick={() => handleBuyClick(product)}>
