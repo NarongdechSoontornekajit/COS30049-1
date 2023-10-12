@@ -42,7 +42,7 @@ db.connect((err) => { //check connection(for debugging)
     console.error('Database connection failed: ' + err.stack);
   } else {
     console.log('Connected to the database');
-
+    /*
     // After the connection is established, you can retrieve and print all products
     const sql = 'SELECT * FROM products';
 
@@ -54,6 +54,7 @@ db.connect((err) => { //check connection(for debugging)
         console.log('All products:', result);
       }
     });
+    */
   }
 });
 
