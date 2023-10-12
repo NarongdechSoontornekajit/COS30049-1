@@ -1,29 +1,34 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import "./buy.css";
 
 function Buy() {
   const location = useLocation();
+  const navigate = useNavigate();
   const searchParams = new URLSearchParams(location.search);
   const productId = searchParams.get('productId');
-
-  // Fetch product details using the productId and display them in your component
+  const productName = searchParams.get('productName');
+  const productDesc = searchParams.get('productDesc');
+  const price = searchParams.get('price');
+  const transactionHash = searchParams.get('transactionHash');
+  const timestamp = searchParams.get('timestamp');
 
   return (
     <div className="transaction-tile">
       {/* Display product details */}
       <h2>Transaction</h2>
-      <p>Smart Contract Information: 000000000000 000000000000</p>
+      <p>Transaction Hash: {transactionHash}</p>
+      <p>Timestamp: {timestamp}</p> {/* Display the timestamp */}
+      <p>Product ID: {productId}</p>
+      <p>Price Name: {productName}</p>
+      <p>Product Disc: {productDesc}</p>
+      <p>Price: ${price}</p>
       <p>Status: Success</p>
-      <p>Timestamp: 26 Aug 2023 02:30:42 PM +UTC</p>
-      <p>Value: $10</p>
-      <p>Account: Random User</p>
       <p>Type: Buy</p>
 
-      <button className="proceed-button">Proceed</button>
+      <button className="proceed-button" onClick={() => navigate('/history')}>Proceed</button>
     </div>
   );
 }
 
 export default Buy;
-
