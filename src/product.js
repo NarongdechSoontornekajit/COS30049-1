@@ -6,7 +6,6 @@ import ButtonBase from "@mui/material/ButtonBase";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
 import "./products.css";
-import crypto from './images/crypto.png';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
@@ -21,15 +20,13 @@ const Img = styled("img")({
 
 export default function ComplexGrid() {
   const [products, setProducts] = useState([]);
-  const [filterCriteria, setFilterCriteria] = React.useState("all"); // State for filter criteria
-  const [searchText, setSearchText] = React.useState(""); // State for search text
+  const [filterCriteria, setFilterCriteria] = React.useState("all");
+  const [searchText, setSearchText] = React.useState("");
 
-  // Function to handle filter criteria change
   const handleFilterChange = (event) => {
     setFilterCriteria(event.target.value);
   };
 
-  // Function to handle search text change
   const handleSearchChange = (event) => {
     setSearchText(event.target.value);
   };
@@ -53,7 +50,7 @@ export default function ComplexGrid() {
         price: productInfo.price
       }
     })
-    .then((response) => {
+      .then((response) => {
         console.log(response.data);
 
         console.log("Transaction Data: ", response.data.transactionData);
@@ -63,21 +60,23 @@ export default function ComplexGrid() {
         const timestamp = response.data.timestamp;
         // Handle the response if needed
         navigate(`/buy?productId=${productId}&productName=${productName}&productDesc=${productDesc}&price=${price}&transactionHash=${transactionHash}&timestamp=${timestamp}`);
-    })
-    .catch((error) => {
+      })
+      .catch((error) => {
         console.error('Error: ', error);
-    });
+      });
   }
 
-  useEffect(() => {
-    // Fetch products when the component mounts
-    fetch('http://localhost:4000/products')
+useEffect(() => {
+    const apiUrl = `http://localhost:8000/products?searchText=${searchText}&sort=${filterCriteria}`;
+    fetch(apiUrl)
       .then((response) => response.json())
-      .then((data) => setProducts(data))
+      .then((data) => {
+        setProducts(data);
+      })
       .catch((error) => console.error('Error fetching data:', error));
-  }, []); // Empty dependency array ensures the effect runs only once
+  }, [searchText, filterCriteria]);
 
-  return (
+return (
     <div>
       <div className="search-filter-container">
         <div className="search-input-container">
@@ -93,19 +92,19 @@ export default function ComplexGrid() {
           <TextField
             className="filter-dropdown"
             select
-            label="Filter by"
+            label="Sort by"
             value={filterCriteria}
             onChange={handleFilterChange}
             variant="outlined"
           >
             <MenuItem value="all">All</MenuItem>
-            <MenuItem value="price">Price</MenuItem>
             <MenuItem value="name">Name</MenuItem>
-            {/* Add more filtering options here */}
+            <MenuItem value="price-asc">Price (Low to High)</MenuItem>
+            <MenuItem value="price-desc">Price (High to Low)</MenuItem>
           </TextField>
         </div>
       </div>
-      {/* Display Products */}
+         {/* Display Products */}
       {products.map((product) => (
         <Paper key={product.id} className="product-tile">
           <div className="product-image">
