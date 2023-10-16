@@ -42,3 +42,26 @@ INSERT INTO products (name, description, price, imageUrl) VALUES
 INSERT INTO products (name, description, price, imageUrl) VALUES
   ('Product 8', 'Description for Product 8', 12.50, 'crypto.png');
 
+-- Create the 'history' table
+CREATE TABLE IF NOT EXISTS history (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    product_id INT NOT NULL,
+    product_name VARCHAR(255) NOT NULL,
+    product_description TEXT,
+    price DECIMAL(10, 2) NOT NULL,
+    user_id INT NOT NULL,
+    transaction_hash VARCHAR(255) NOT NULL,
+    timestamp TIMESTAMP NOT NULL
+);
+
+-- Insert sample data with a random transaction hash and timestamp
+INSERT INTO history (product_id, product_name, product_description, price, user_id, transaction_hash, timestamp) VALUES
+  (6, 'Product 6', 'Description for Product 6', 12.50, 1, '0xd52d9098f2f9af0942402f6f6caffa8a41d84da5bcaf53e5c1e1e2cdcf1f7938', '2023-10-16 14:30:00');
+
+-- Insert sample data with a random transaction hash and timestamp
+INSERT INTO history (product_id, product_name, product_description, price, user_id, transaction_hash, timestamp) VALUES
+  (7, 'Product 7', 'Description for Product 7', 12.50, 2, '0xc9551a98b322230583656604b6a3ab26b69cb4eee67325a0c4436276c96cee89', '2023-10-16 15:45:00');
+
+
+
+

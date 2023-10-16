@@ -67,7 +67,7 @@ export default function ComplexGrid() {
   }
 
 useEffect(() => {
-    const apiUrl = `http://localhost:8000/products?searchText=${searchText}&sort=${filterCriteria}`;
+    const apiUrl = `http://localhost:4000/products?searchText=${searchText}&sort=${filterCriteria}`;
     fetch(apiUrl)
       .then((response) => response.json())
       .then((data) => {
