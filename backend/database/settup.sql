@@ -62,6 +62,14 @@ INSERT INTO history (product_id, product_name, product_description, price, user_
 INSERT INTO history (product_id, product_name, product_description, price, user_id, transaction_hash, timestamp) VALUES
   (7, 'Product 7', 'Description for Product 7', 12.50, 2, '0xc9551a98b322230583656604b6a3ab26b69cb4eee67325a0c4436276c96cee89', '2023-10-16 15:45:00');
 
+-- Create the 'user' table
+CREATE TABLE IF NOT EXISTS users (
+  user_id INT AUTO_INCREMENT PRIMARY KEY,
+  user_name VARCHAR(255) NOT NULL,
+  user_password VARCHAR(255) NOT NULL
+);
 
+INSERT INTO users (user_name, user_password) VALUES ('user1', 'pass1');
 
+INSERT INTO users (user_name, user_password) VALUES ('user2', 'pass2');
 

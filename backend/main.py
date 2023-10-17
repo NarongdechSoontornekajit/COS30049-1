@@ -12,8 +12,8 @@ app = FastAPI()
 """
 db_config = {
     "host": "localhost",
-    "user": "test",
-    "password": "1150",
+    "user": "jn",
+    "password": "new_password",
     "database": "etherTradeDB",
 }
 """

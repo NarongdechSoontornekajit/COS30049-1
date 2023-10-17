@@ -4,16 +4,61 @@ const mysql = require('mysql');
 const cors = require('cors');
 
 const app = express();
-const PORT = 4000;
+const PORT = 8000;
 
 app.use(cors());
 app.use(express.json());
 
 const db = mysql.createConnection({
   host: 'localhost',
-  user: 'test',
-  password: '1150',
+  user: 'jn',
+  password: 'new_password',
   database: 'etherTradeDB',
+});
+
+app.route('/login')
+  .get((req, res) => {
+    res.status(405).send('Method Not Allowed');
+  })
+  .post((req, res) => {
+    const { username, password } = req.body;
+
+    const sql = 'SELECT * FROM users WHERE user_name = ? AND user_password = ?';
+    db.query(sql, [username, password], (err, result) => {
+      if (err) {
+        console.error(err);
+        res.status(500).send('Internal Server Error');
+      } else {
+        if (result.length > 0) {
+          // User found in the database, send a success response
+          res.status(200).send('Login successful');
+        } else {
+          // User not found, send an unauthorized response
+          res.status(401).send('Unauthorized');
+        }
+      }
+    });
+  });
+
+
+// Add user route
+app.post('/addUser', (req, res) => {
+  const { newUsername, newPassword } = req.body;
+
+  const sql = 'INSERT INTO `users` (user_name, user_password) VALUES (?, ?)';
+
+  db.query(sql, [newUsername, newPassword], (err, result) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({ error: 'Internal Server Error' });
+    }
+
+    if (result.affectedRows === 1) {
+      return res.status(200).send('User added successfully');
+    } else {
+      return res.status(500).send('Failed to add user');
+    }
+  });
 });
 
 app.get('/products', (req, res) => {
