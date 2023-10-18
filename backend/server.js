@@ -16,31 +16,27 @@ const db = mysql.createConnection({
   database: 'etherTradeDB',
 });
 
-app.route('/login')
-  .get((req, res) => {
-    res.status(405).send('Method Not Allowed');
-  })
-  .post((req, res) => {
-    const { username, password } = req.body;
+app.route('/login').post((req, res) => {
+  const { username, password } = req.body;
 
-    const sql = 'SELECT * FROM users WHERE user_name = ? AND user_password = ?';
-    db.query(sql, [username, password], (err, result) => {
-      if (err) {
-        console.error(err);
-        res.status(500).send('Internal Server Error');
-      } else {
-        if (result.length > 0) {
-          // User found in the database, send a success response
-          res.status(200).send('Login successful');
-        } else {
-          // User not found, send an unauthorized response
-          res.status(401).send('Unauthorized');
-        }
-      }
-    });
+  const sql = 'SELECT * FROM users WHERE user_name = ? AND user_password = ?';
+  db.query(sql, [username, password], (err, result) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).send('Internal Server Error');
+    }
+
+    if (result.length > 0) {
+      // User found in the database
+      const user = { userId: result[0].user_id, username: result[0].user_name };
+      res.json(user);
+    } else {
+      // User not found, send an unauthorized response
+      res.status(401).send('Unauthorized');
+    }
   });
-
-
+});
+    
 // Add user route
 app.post('/addUser', (req, res) => {
   const { newUsername, newPassword } = req.body;
@@ -111,16 +107,16 @@ app.get('/history', (req, res) => {
   });
 });
 
-app.get('/insert_history', (req, res) => {
-  const { product_id, product_name, product_description, price, user_id, transaction_hash, timestamp } = req.query;
+app.post('/insert_history', (req, res) => {
+  const { product_id, product_name, product_description, price, transaction_hash, user_id, time_stamp } = req.body;
 
-  if (!product_id || !product_name || !price || !user_id || !transaction_hash) {
+  if (!product_id || !product_name || !price || !user_id ) {
     return res.status(400).json({ error: 'Missing required fields' });
   }
 
-  const sql = `INSERT INTO history (product_id, product_name, product_description, price, user_id, transaction_hash, timestamp) VALUES (${product_id}, '${product_name}', '${product_description}', ${price}, ${user_id}, '${transaction_hash}', '${timestamp}')`;
+  const sql = `INSERT INTO history (product_id, product_name, product_description, price, transaction_hash, user_id, time_stamp) VALUES (?, ?, ?, ?, ?, ?, ?)`;
 
-  db.query(sql, (err, result) => {
+  db.query(sql, [product_id, product_name, product_description, price, transaction_hash, user_id, time_stamp], (err, result) => {
     if (err) {
       console.error(err);
       res.status(500).send('Internal Server Error');
@@ -129,7 +125,6 @@ app.get('/insert_history', (req, res) => {
     }
   });
 });
-
 
 db.connect((err) => { //check connection(for debugging)
   if (err) {

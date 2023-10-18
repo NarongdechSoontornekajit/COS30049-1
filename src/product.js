@@ -42,7 +42,7 @@ export default function ComplexGrid() {
       price
     };
     // Send a GET request with the individual fields as query parameters
-    axios.get('http://127.0.0.1:8000/purchase', {
+    axios.get('http://127.0.0.1:8001/purchase', {
       params: {
         productId: productInfo.productId,
         productName: productInfo.productName,
@@ -109,7 +109,8 @@ return (
         <Paper key={product.id} className="product-tile">
           <div className="product-image">
             <ButtonBase sx={{ width: 128, height: 128 }}>
-              <Img alt={product.name} src={product.imageUrl} />
+                <Img alt={product.name} src={process.env.PUBLIC_URL + '/images/crypto.png'} />
+
             </ButtonBase>
           </div>
           <div className="product-info">
@@ -130,7 +131,6 @@ return (
             className="buy-button"
             onClick={() =>
               handleBuyClick(product.id, product.name, product.description, product.price)
-              //handleBuyClick(1, "product.name", "product.description", 2)
             }
           >
             Buy

@@ -2,14 +2,15 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Grid, Paper, Typography, TextField, Button } from '@mui/material';
 
+
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
   const [newUsername, setNewUsername] = useState('');
   const [newPassword, setNewPassword] = useState('');
-  const [loggedIn, setLoggedIn] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
   const [showAddUserForm, setShowAddUserForm] = useState(false);
+
 
   const navigate = useNavigate();
 
@@ -27,9 +28,13 @@ const Login = () => {
         });
 
         if (response.ok) {
-          setLoggedIn(true);
+          const user = await response.json();
+          console.log('User:', user); // Log the user object
+          localStorage.setItem('userId', user.userId);  // Store user ID
+          // Redirect to the history page
           navigate('/history');
-        } else {
+        } 
+          else {
           const errorMessage = await response.text();
           console.error('Login failed:', errorMessage);
           setErrorMessage('Incorrect login details');
@@ -41,8 +46,7 @@ const Login = () => {
     } else {
       setErrorMessage('Username and password are required');
     }
-  };
-
+            };
   const handleAddUser = async (e) => {
     e.preventDefault();
 

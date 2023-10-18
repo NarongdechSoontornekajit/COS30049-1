@@ -4,7 +4,6 @@ from web3 import Web3
 from solcx import compile_standard, install_solc
 import json
 from datetime import datetime
-import mysql.connector
 
 app = FastAPI()
 
@@ -39,8 +38,8 @@ async def purchase_product(
 ):
     # Ethereum settings
     chain_id = 1337  # Default chain ID for Ganache
-    my_address = "0x3e916ef0122bc3f9168F774b40dD2E6e20167b31"
-    private_key = "0xdb2abbf445fa508da3847b9c4d9c6465562e16814a6b52429aa152779a1551de"
+    my_address = "0xFFB3829029497159c0Fbd61d93ED0C0797359Df4"
+    private_key = "0x02433c0fe0825aee45595c18d1c94fc78b57a7e8f733fd7e0480634bb12d967e"
 
     with open("./backend/SimpleStorage.sol", "r") as file:
         simple_storage_file = file.read()

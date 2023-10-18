@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect} from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios'; // Import axios
 import "./buy.css";
@@ -14,28 +14,55 @@ function Buy() {
   const transactionHash = searchParams.get('transactionHash');
   const timestamp = searchParams.get('timestamp');
 
+  
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleProceed = () => {
-    // Create query parameters for the GET request
-    const queryParams = `?product_id=${productId}&product_name=${productName}&product_description=${productDesc}&price=${price}&user_id=1&transaction_hash=${transactionHash}&timestamp=${timestamp}`;
+  useEffect(() => {
+    // Check if the user is authenticated (has a valid token)
+    const accessToken = localStorage.getItem('userId');
+    if (!accessToken) {
+      // Redirect to the login page if the user is not authenticated
+      navigate('/login');
+    }
+  }, [navigate]);
 
-    // Send a GET request with the query parameters
-    setIsLoading(true); // You can set loading state here
-    axios.get(`http://127.0.0.1:4000/insert_history${queryParams}`)
-      .then(response => {
-        console.log('Transaction data retrieved successfully:', response.data);
-        setIsLoading(false); // Set loading state back to false
-        // You can handle the response here, but it won't navigate to a new URL
-      })
-      .catch(error => {
-        console.error('Error retrieving transaction data:', error);
-        setIsLoading(false); // Set loading state back to false
-      });
+const handleProceed = async () => {
+  try {
+    // Get the user ID from local storage (assuming it's stored in the token)
+    const userId = localStorage.getItem('userId');
+
+    if (!userId) {
+      console.error('User ID not found in local storage');
+      navigate('/login');
+      return;
+    }
+
+    // Create data object for the POST request
+    const data = {
+      product_id: productId,
+      product_name: productName,
+      product_description: productDesc,
+      price,
+      transaction_hash: transactionHash,
+      user_id: userId,
+      timestamp,
+    };
+    console.log(data);
+    // Send a POST request to insert the transaction into history
+    setIsLoading(true);
+    const response = await axios.post('http://127.0.0.1:8000/insert_history', data);
+
+    console.log('Transaction data retrieved successfully:', response.data);
+    setIsLoading(false);
 
     // Navigate to the '/history' page
     navigate('/history');
-  };
+  } catch (error) {
+    console.error('Error retrieving transaction data:', error);
+    setIsLoading(false);
+  }
+};
+
 
   return (
     <div className="transaction-tile">
